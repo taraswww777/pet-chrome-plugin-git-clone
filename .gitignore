@@ -1,0 +1,62 @@
+# Зависимости и пакеты
+node_modules/
+vendor/
+.env
+.env.local
+.env.*.local
+
+# IDE и редакторы
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+
+# Скомпилированные файлы
+dist/
+build/
+*.class
+*.jar
+*.war
+*.ear
+*.log
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.env/
+.venv/
+
+# JavaScript/Node
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.next/
+.nuxt/
+
+# Java
+target/
+out/
+
+# Временные файлы
+*.swp
+*.swo
+*~
+.tmp/
+.temp/
+
+# Логи и базы данных
+*.log
+*.sql
+*.sqlite
+*.db
+
+# Системные файлы
+Thumbs.db
+.DS_Store
+.directory

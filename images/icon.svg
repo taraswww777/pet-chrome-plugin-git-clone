@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <!-- Фон -->
+  <rect width="128" height="128" fill="#ffffff"/>
+  
+  <!-- Символ git ветки -->
+  <path d="M64 20
+           A10 10 0 0 1 64 40
+           A10 10 0 0 1 64 20
+           M64 40
+           L64 70
+           M44 50
+           A10 10 0 0 1 44 70
+           A10 10 0 0 1 44 50
+           M84 90
+           A10 10 0 0 1 84 110
+           A10 10 0 0 1 84 90
+           M64 70
+           L84 90
+           M64 70
+           L44 70" 
+        fill="none" 
+        stroke="#000000" 
+        stroke-width="8"
+        stroke-linecap="round"/>
+</svg>
