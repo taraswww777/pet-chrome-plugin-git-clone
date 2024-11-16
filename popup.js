@@ -2,44 +2,66 @@ function copyToClipboard(writeText) {
   return navigator.clipboard.writeText(writeText);
 }
 
-const cloneButtonEl = document.getElementById('cloneButton');
-const messagesEl = document.getElementById('messages');
+/** Вычисляем постояянную часть пути до репозитория */
+const calcRepoPath = url => {
+  // Извлечение имени репозитория из URL
+  const repoMatch = url.match(/github\.com\/([^\/]+)\/([^\/]+)(\/.*)?/);
 
-cloneButtonEl.addEventListener('click', () => {
-  chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
-    const url = tabs[0].url;
-    const cloneMethod = document.querySelector('input[name="cloneMethod"]:checked').value;
+  if (repoMatch) {
+    const user = repoMatch[1];
+    const repo = repoMatch[2];
 
-    // Извлечение имени репозитория из URL
-    const repoMatch = url.match(/github\.com\/([^\/]+)\/([^\/]+)(\/.*)?/);
+    return `${user}/${repo}`;
+  }
 
-    if (repoMatch) {
-      const user = repoMatch[1];
-      const repo = repoMatch[2];
-      const repoPath = `${user}/${repo}`;
-      let cloneUrl;
+  return '';
+};
 
-      if (cloneMethod === 'http') {
-        cloneUrl = `https://github.com/${repoPath}.git`;
-      } else {
-        cloneUrl = `git@github.com:${repoPath}.git`;
-      }
+const genCopiedItem = value => {
+  const newItem = document.createElement('div');
+  newItem.className = 'copiedItem';
 
-      const copiedText = `git clone ${cloneUrl}`;
+  const newItemValue = document.createElement('a');
+  newItemValue.className = 'copiedValue';
+  newItemValue.innerText = value;
+  newItemValue.href = value;
+  newItemValue.target = '__blank';
 
-      copyToClipboard(copiedText);
-
-      messagesEl.innerHTML = `Copied to clipboard:<br/>${copiedText}`;
+  const newItemButton = document.createElement('button');
+  newItemButton.className = 'copiedButton';
+  newItemButton.addEventListener('click', () => {
+    copyToClipboard(value).finally(() => {
+      newItemButton.className = 'copiedButton copiedButton--copied';
 
       setTimeout(() => {
-        messagesEl.innerHTML = '';
-      }, 3000);
+        newItemButton.className = 'copiedButton';
+      }, 2000);
+    });
+  });
 
-      chrome.runtime.sendMessage({ action: 'clone', repoUrl: cloneUrl }, response => {
-        console.log('response:', response);
-      });
-    } else {
-      alert('Unable to determine the repository from the URL.');
-    }
+  newItem.appendChild(newItemValue);
+  newItem.appendChild(newItemButton);
+
+  return newItem;
+};
+
+// const copyHttpButtonElement = document.querySelector('#copy_http button');
+
+chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
+  const repoPath = calcRepoPath(tabs[0].url);
+
+  const copiedListElement = document.querySelector('#copiedList');
+
+  const strings = [
+    `git clone https://github.com/${repoPath}.git`,
+    `git clone git@github.com:${repoPath}.git`,
+    `https://github.com/${repoPath}/pulls`,
+    `https://github.com/${repoPath}`,
+  ];
+
+  strings.forEach(itemValue => {
+    const newCopiedItemEl = genCopiedItem(itemValue);
+
+    copiedListElement.appendChild(newCopiedItemEl);
   });
 });
