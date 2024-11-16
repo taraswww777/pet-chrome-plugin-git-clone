@@ -10,25 +10,10 @@ h1 {
   font-size: 1rem;
 }
 
-button {
-  width: 100%;
-  padding: 10px;
-  margin-top: 10px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-button:hover {
-  background-color: #0056b3;
-}
-
 .container {
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap   ;
+  flex-wrap: wrap;
   row-gap: 0.5rem;
   column-gap: 0.5rem;
 }
@@ -46,6 +31,56 @@ button:hover {
 
     &:hover {
       border-bottom-color: #007bff;
+    }
+  }
+}
+
+.copiedList {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  row-gap: 1rem;
+}
+
+.copiedItem {
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100%;
+  justify-content: space-between;
+  column-gap: 0.5rem;
+
+  .copiedValue {
+    font-size: 0.75rem;
+    width: 100%;
+    text-overflow: clip;
+  }
+
+  .copiedButton {
+    transition: all 0.5s;
+    display: inline;
+    background-image: url(./assets/icons/copy.svg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    width: 2rem;
+    height: 2rem;
+    background-size: 70%;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: #007bff;
+
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+
+  .copiedButton--copied {
+    transition: all 0.5s;
+    background-color: greenyellow;
+
+    &:hover {
+      background-color: rgb(189, 224, 135);
     }
   }
 }
