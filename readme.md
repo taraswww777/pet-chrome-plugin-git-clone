@@ -18,7 +18,7 @@ Plugin for clone repository from GitHub.
    Запустите Яндекс.Браузер, если он еще не открыт.
 
 3. **Перейдите в настройки расширений**:
-   В адресной строке введите <a href="browser://extensions/" target="_blank">`browser://extensions`</a> и нажмите Enter.
+   В адресной строке введите <a href="http://browser://extensions/" target="_blank">`browser://extensions`</a> и нажмите Enter.
    Вы также можете открыть меню (три горизонтальные линии в правом верхнем углу) и выбрать "Дополнительно" > "Расширения".
 
 4. **Включите режим разработчика**:
